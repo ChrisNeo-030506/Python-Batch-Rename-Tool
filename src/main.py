@@ -20,6 +20,13 @@ def Special_Symbols():
             special_symbols.append(symbols)
     return special_symbols
 
+def Numbers():
+    numbers = []
+    for nums, boolean_variable in DeleteTab_Numbers_State.items():
+        if boolean_variable.get() == True:
+            numbers.append(nums)
+    return numbers
+
 def DeleteTab_SelectButton():
     DeleteTab_CurrentListbox.delete(0, tk.END)
     DeleteTab_RealPath.clear()
@@ -48,18 +55,21 @@ def DeleteTab_UpdatePreview():
     DeleteTab_PreviewListbox.delete(0, tk.END)
     delete_words = Delete_Words()
     special_symbols = Special_Symbols()
+    numbers = Numbers()
     for path in DeleteTab_RealPath:
         old_name = os.path.basename(path)
-        new_name = Generate_New_Name(old_name, delete_words, special_symbols)
+        new_name = Generate_New_Name(old_name, delete_words, special_symbols, numbers)
         DeleteTab_PreviewListbox.insert(tk.END, f"{new_name}")
 
-def Generate_New_Name(old_name, delete_words, special_symbols):
+def Generate_New_Name(old_name, delete_words, special_symbols, numbers):
     name, extension = os.path.splitext(old_name)
     for words in delete_words:
         if words.isalnum():
             name = name.replace(words, "")
     for symbol in special_symbols:
         name = name.replace(symbol, "")
+    for nums in numbers:
+        name = name.replace(nums, "")
     name = " ".join(name.split())
     return name + extension
 
@@ -74,10 +84,11 @@ def DeleteTab_StartButton():
 def DeleteTab_BatchRename():
     delete_words = Delete_Words()
     special_symbols = Special_Symbols()
+    numbers = Numbers()
     for path in DeleteTab_RealPath:
         directory = os.path.dirname(path)
         old_name = os.path.basename(path)
-        new_name = Generate_New_Name(old_name, delete_words, special_symbols)
+        new_name = Generate_New_Name(old_name, delete_words, special_symbols, numbers)
         old_full_path = path
         new_full_path = os.path.join(directory, new_name)
         if old_full_path != new_full_path:
@@ -188,6 +199,8 @@ DeleteTab_RealPath = []
 AddTab_RealPath = []
 DeleteTab_SpecialSymbols = ["(", ")", "[", "]", "{", "}", "!", "@", "#", "$", "%", "^", "&", "-", "_", "=", "+", ",", ".", ";", "'", "~"]
 DeleteTab_SpecialSymbols_State = {}
+DeleteTab_Numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+DeleteTab_Numbers_State = {}
 
 #--------------------------------------------------DeleteTab--------------------------------------------------
 
@@ -246,6 +259,15 @@ for i, symbols in enumerate(DeleteTab_SpecialSymbols):
     DeleteTab_SpecialSymbols_Checkbutton = tk.BooleanVar()
     DeleteTab_SpecialSymbols_State[symbols] = DeleteTab_SpecialSymbols_Checkbutton
     tk.Checkbutton(SpecialSymbolsFrame, text=symbols, variable=DeleteTab_SpecialSymbols_Checkbutton, command=DeleteTab_UpdatePreview).grid(row=i//8, column=i%8)
+
+# NumbersFrame
+NumbersFrame = tk.LabelFrame(DeleteTab, text=" Numbers ")
+NumbersFrame.grid(row=1, column=2, sticky="nsew")
+
+for i, numbers in enumerate(DeleteTab_Numbers):
+    DeleteTab_Numbers_Checkbutton = tk.BooleanVar()
+    DeleteTab_Numbers_State[numbers] = DeleteTab_Numbers_Checkbutton
+    tk.Checkbutton(NumbersFrame, text=numbers, variable=DeleteTab_Numbers_Checkbutton, command=DeleteTab_UpdatePreview).grid(row=i//4, column=i%4)
 
 #--------------------------------------------------AddTab--------------------------------------------------
 
