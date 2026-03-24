@@ -7,7 +7,7 @@ from tkinter import filedialog, messagebox
 
 def Delete_Words():
     delete_words = []
-    for entry in (DeleteWords_Entry1, DeleteWords_Entry2, DeleteWords_Entry3):
+    for entry in (DeleteWords_Entry1, DeleteWords_Entry2, DeleteWords_Entry3, DeleteWords_Entry4, DeleteWords_Entry5):
         words = entry.get().strip()
         if words != "":
             delete_words.append(words)
@@ -176,7 +176,7 @@ def AddTab_BatchRename():
 # Root
 root = tk.Tk()
 root.title("Python-Batch-Rename-Tool")
-root.geometry("760x540")
+root.geometry("760x570")
 
 # Notebook
 Notebook = ttk.Notebook(root)
@@ -247,9 +247,21 @@ tk.Label(DeleteWordsFrame, text="Words 3:").grid(row=2, column=0)
 DeleteWords_Entry3 = tk.Entry(DeleteWordsFrame)
 DeleteWords_Entry3.grid(row=2, column=1)
 
+tk.Label(DeleteWordsFrame, text="Words 4:").grid(row=3, column=0)
+
+DeleteWords_Entry4 = tk.Entry(DeleteWordsFrame)
+DeleteWords_Entry4.grid(row=3, column=1)
+
+tk.Label(DeleteWordsFrame, text="Words 5:").grid(row=4, column=0)
+
+DeleteWords_Entry5 = tk.Entry(DeleteWordsFrame)
+DeleteWords_Entry5.grid(row=4, column=1)
+
 DeleteWords_Entry1.bind("<KeyRelease>", lambda e: DeleteTab_UpdatePreview())
 DeleteWords_Entry2.bind("<KeyRelease>", lambda e: DeleteTab_UpdatePreview())
 DeleteWords_Entry3.bind("<KeyRelease>", lambda e: DeleteTab_UpdatePreview())
+DeleteWords_Entry4.bind("<KeyRelease>", lambda e: DeleteTab_UpdatePreview())
+DeleteWords_Entry5.bind("<KeyRelease>", lambda e: DeleteTab_UpdatePreview())
 
 # SpecialSymbolsFrame
 SpecialSymbolsFrame = tk.LabelFrame(DeleteTab, text=" Special Symbols ")
