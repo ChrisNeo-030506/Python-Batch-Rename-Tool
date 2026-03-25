@@ -225,8 +225,8 @@ DeleteTab_ModeFrame.grid(row=0, column=2, pady=10, sticky="nsew")
 tk.Radiobutton(DeleteTab_ModeFrame, text="Select a Single Folder", variable=DeleteTab_Mode_Radiobutton, value=1).grid()
 tk.Radiobutton(DeleteTab_ModeFrame, text="Select Multiple Files", variable=DeleteTab_Mode_Radiobutton, value=2).grid()
 
-tk.Button(DeleteTab_ModeFrame, text="Select", command=DeleteTab_SelectButton).grid()
-tk.Button(DeleteTab_ModeFrame, text="Start", command=DeleteTab_StartButton).grid()
+tk.Button(DeleteTab_ModeFrame, text="Select", command=DeleteTab_SelectButton).grid(padx=5, pady=2, sticky="nsew")
+tk.Button(DeleteTab_ModeFrame, text="Start", command=DeleteTab_StartButton).grid(padx=5 ,pady=2, sticky="nsew")
 
 # DeleteWordsFrame
 DeleteWordsFrame = tk.LabelFrame(DeleteTab, text=" Delete Words ")
@@ -304,8 +304,8 @@ AddTab_ModeFrame.grid(row=0, column=2, pady=10, sticky="nsew")
 tk.Radiobutton(AddTab_ModeFrame, text="Select a Single Folder", variable=AddTab_Mode_Radiobutton, value=1).grid()
 tk.Radiobutton(AddTab_ModeFrame, text="Select Multiple Files", variable=AddTab_Mode_Radiobutton, value=2).grid()
 
-tk.Button(AddTab_ModeFrame, text="Select", command=AddTab_SelectButton).grid()
-tk.Button(AddTab_ModeFrame, text="Start", command=AddTab_StartButton).grid()
+tk.Button(AddTab_ModeFrame, text="Select", command=AddTab_SelectButton).grid(padx=5, pady=2, sticky="nsew")
+tk.Button(AddTab_ModeFrame, text="Start", command=AddTab_StartButton).grid(padx=5, pady=2, sticky="nsew")
 
 # AddWordsFrame
 AddWordsFrame = tk.LabelFrame(AddTab, text=" Add Words ")
