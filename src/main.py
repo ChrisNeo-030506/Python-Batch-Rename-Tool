@@ -95,6 +95,18 @@ def DeleteTab_BatchRename():
             os.rename(old_full_path, new_full_path)
     messagebox.showinfo("Completed", "Batch Renaming Finished")
 
+def DeleteTab_ResetButton():
+    DeleteTab_RealPath.clear()
+    DeleteTab_CurrentListbox.delete(0, tk.END)
+    DeleteTab_PreviewListbox.delete(0, tk.END)
+    for entry in (DeleteWords_Entry1, DeleteWords_Entry2, DeleteWords_Entry3, DeleteWords_Entry4, DeleteWords_Entry5):
+        entry.delete(0, tk.END)
+    for var in DeleteTab_SpecialSymbols_State.values():
+        var.set(False)
+    for var in DeleteTab_Numbers_State.values():
+        var.set(False)
+    DeleteTab_Mode_Radiobutton.set(0)
+
 #--------------------------------------------------AddTab_Functions--------------------------------------------------
 
 def AddTab_SelectButton():
@@ -171,6 +183,15 @@ def AddTab_BatchRename():
             os.rename(path, new_path)
     messagebox.showinfo("Completed", "Batch Renaming Finished")
 
+def AddTab_ResetButton():
+    AddTab_RealPath.clear()
+    AddTab_CurrentListbox.delete(0, tk.END)
+    AddTab_PreviewListbox.delete(0, tk.END)
+    AddWords_Entry.delete(0, tk.END)
+    AddTab_AddWordsOptions_Radiobutton.set(0)
+    AddTab_AddWordsOptions_Checkbutton.set(False)
+    AddTab_Mode_Radiobutton.set(0)
+
 #--------------------------------------------------Global_Initializations--------------------------------------------------
 
 # Root
@@ -227,6 +248,7 @@ tk.Radiobutton(DeleteTab_ModeFrame, text="Select Multiple Files", variable=Delet
 
 tk.Button(DeleteTab_ModeFrame, text="Select", command=DeleteTab_SelectButton).grid(padx=5, pady=2, sticky="nsew")
 tk.Button(DeleteTab_ModeFrame, text="Start", command=DeleteTab_StartButton).grid(padx=5 ,pady=2, sticky="nsew")
+tk.Button(DeleteTab_ModeFrame, text="Reset", command=DeleteTab_ResetButton).grid(padx=5, pady=2, sticky="nsew")
 
 # DeleteWordsFrame
 DeleteWordsFrame = tk.LabelFrame(DeleteTab, text=" Delete Words ")
@@ -306,6 +328,7 @@ tk.Radiobutton(AddTab_ModeFrame, text="Select Multiple Files", variable=AddTab_M
 
 tk.Button(AddTab_ModeFrame, text="Select", command=AddTab_SelectButton).grid(padx=5, pady=2, sticky="nsew")
 tk.Button(AddTab_ModeFrame, text="Start", command=AddTab_StartButton).grid(padx=5, pady=2, sticky="nsew")
+tk.Button(AddTab_ModeFrame, text="Reset", command=AddTab_ResetButton).grid(padx=5, pady=2, sticky="nsew")
 
 # AddWordsFrame
 AddWordsFrame = tk.LabelFrame(AddTab, text=" Add Words ")
@@ -326,4 +349,5 @@ tk.Radiobutton(AddWordsOptionsFrame, text="Front", variable=AddTab_AddWordsOptio
 tk.Radiobutton(AddWordsOptionsFrame, text="End", variable=AddTab_AddWordsOptions_Radiobutton, value=2, command=AddTab_UpdatePreview).grid()
 
 tk.Checkbutton(AddWordsOptionsFrame, text="Add Space", variable=AddTab_AddWordsOptions_Checkbutton, command=AddTab_UpdatePreview).grid()
+
 root.mainloop()
