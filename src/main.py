@@ -192,6 +192,17 @@ def AddTab_ResetButton():
     AddTab_AddWordsOptions_Checkbutton.set(False)
     AddTab_Mode_Radiobutton.set(0)
 
+#--------------------------------------------------ChangeTab_Functions--------------------------------------------------
+def ChangeTab_SelectButton():
+    pass
+def ChangeTab_UpdatePreview():
+    pass
+def ChangeTab_StartButton():
+    pass
+def ChangeTab_BatchRename():
+    pass
+def ChangeTab_ResetButton():
+    pass
 #--------------------------------------------------Global_Initializations--------------------------------------------------
 
 # Root
@@ -209,9 +220,13 @@ Notebook.add(DeleteTab, text=" Delete ")
 AddTab = ttk.Frame(Notebook)
 Notebook.add(AddTab, text=" Add ")
 
+ChangeTab = ttk.Frame(Notebook)
+Notebook.add(ChangeTab, text=" Change ")
+
 # Tk Variables
 DeleteTab_Mode_Radiobutton = tk.IntVar()
 AddTab_Mode_Radiobutton = tk.IntVar()
+ChangeTab_Mode_Radiobutton = tk.IntVar()
 AddTab_AddWordsOptions_Radiobutton = tk.IntVar()
 AddTab_AddWordsOptions_Checkbutton = tk.BooleanVar()
 
@@ -349,5 +364,32 @@ tk.Radiobutton(AddWordsOptionsFrame, text="Front", variable=AddTab_AddWordsOptio
 tk.Radiobutton(AddWordsOptionsFrame, text="End", variable=AddTab_AddWordsOptions_Radiobutton, value=2, command=AddTab_UpdatePreview).grid()
 
 tk.Checkbutton(AddWordsOptionsFrame, text="Add Space", variable=AddTab_AddWordsOptions_Checkbutton, command=AddTab_UpdatePreview).grid()
+
+#--------------------------------------------------ChangeTab--------------------------------------------------
+
+# CurrentFrame
+ChangeTab_CurrentFrame = tk.LabelFrame(ChangeTab, text=" Current Select: ")
+ChangeTab_CurrentFrame.grid(row=0, column=0, sticky="nsew")
+
+ChangeTab_CurrentListbox = tk.Listbox(ChangeTab_CurrentFrame, width=50, height=25)
+ChangeTab_CurrentListbox.grid()
+
+# PreviewFrame
+ChangeTab_PreviewFrame = tk.LabelFrame(ChangeTab, text=" Preview ")
+ChangeTab_PreviewFrame.grid(row=0, column=1, sticky="nsew")
+
+ChangeTab_PreviewListbox = tk.Listbox(ChangeTab_PreviewFrame, width=50, height=25)
+ChangeTab_PreviewListbox.grid()
+
+# ModeFrame
+ChangeTab_ModeFrame = tk.LabelFrame(ChangeTab)
+ChangeTab_ModeFrame.grid(row=0, column=2, pady=10, sticky="nsew")
+
+tk.Radiobutton(ChangeTab_ModeFrame, text="Select a Single Folder", variable=ChangeTab_Mode_Radiobutton, value=1).grid()
+tk.Radiobutton(ChangeTab_ModeFrame, text="Select Multiple Files", variable=ChangeTab_Mode_Radiobutton, value=2).grid()
+
+tk.Button(ChangeTab_ModeFrame, text="Select", command=ChangeTab_SelectButton).grid(padx=5, pady=2, sticky="nsew")
+tk.Button(ChangeTab_ModeFrame, text="Start", command=ChangeTab_StartButton).grid(padx=5, pady=2, sticky="nsew")
+tk.Button(ChangeTab_ModeFrame, text="Reset", command=ChangeTab_ResetButton).grid(padx=5, pady=2, sticky="nsew")
 
 root.mainloop()
